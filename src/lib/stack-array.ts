@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-04-20 22:16:40
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-04-22 21:42:20
+ * @LastEditTime: 2020-04-30 22:27:11
  */
 interface stackFace {
   push:Function // 添加元素
@@ -20,7 +20,7 @@ class Stack implements stackFace {
     // 放入栈底
     this.stack.unshift(val)
   }
-  public pop():void {
+  public pop():any {
     // 删除栈顶
     return this.stack.shift()
   }

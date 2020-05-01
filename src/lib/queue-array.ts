@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-04-25 11:18:22
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-04-25 11:22:44
+ * @LastEditTime: 2020-04-30 22:27:30
  */
 /*
  * @Descripttion: 用数组模拟栈
@@ -27,7 +27,7 @@ class Queue implements queueInterface {
     // 放入队列末尾
     this.queue.push(val)
   }
-  public pop():void {
+  public pop():any {
     // 删除并返回队列前端
     return this.queue.shift()
   }
