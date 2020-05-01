@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-04-25 11:18:22
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-04-30 22:27:30
+ * @LastEditTime: 2020-05-01 10:31:46
  */
 /*
  * @Descripttion: 用数组模拟栈
@@ -17,8 +17,8 @@ interface queueInterface {
   pop:Function // 移除元素
   peek:Function // 返回队列前端
   isEmpty:Function // 队是否为空
-  clear:Function // 清空栈
-  size:Function // 栈的长度
+  clear:Function // 清空队列
+  size:Function // 队列的长度
 }
 
 class Queue implements queueInterface {
