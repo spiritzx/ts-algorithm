@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-04-25 11:18:22
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-05-01 10:31:46
+ * @LastEditTime: 2020-05-02 17:33:30
  */
 /*
  * @Descripttion: 用数组模拟栈
@@ -18,11 +18,11 @@ interface queueInterface {
   peek:Function // 返回队列前端
   isEmpty:Function // 队是否为空
   clear:Function // 清空队列
-  size:Function // 队列的长度
+  size:Function // 队列的长度 
 }
 
 class Queue implements queueInterface {
-  private queue = new Array()
+  protected queue = new Array()
   public push(val:any):void {
     // 放入队列末尾
     this.queue.push(val)
@@ -36,7 +36,7 @@ class Queue implements queueInterface {
     return this.queue[0]
   }
   public isEmpty():boolean {
-    return !!this.queue.length
+    return !this.queue.length
   }
   public clear():void {
     this.queue = []

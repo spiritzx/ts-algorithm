@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-04-20 22:16:40
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-04-30 22:27:11
+ * @LastEditTime: 2020-05-02 12:03:49
  */
 interface stackFace {
   push:Function // 添加元素
@@ -15,7 +15,7 @@ interface stackFace {
 }
 
 class Stack implements stackFace {
-  private stack = new Array()
+  protected stack = new Array()
   public push(val:any):void {
     // 放入栈底
     this.stack.unshift(val)
