@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-05-03 16:34:30
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-05-04 22:11:25
+ * @LastEditTime: 2020-05-05 22:44:00
  */
 interface nodeInterface {
   element: any
@@ -21,8 +21,9 @@ interface listNodeInterface {
   size:number // 链表数据长度
   header:NodeObj // 链表头部
   append:Function // 添加链表元素
-
-  // insert:Function
+  display:Function // 通过数组展示链表
+  insert:Function // 插入数据
+  get:Function // 获取某个位置的元素
   // get:Function
   // indexOf:Function
   // update:Function
@@ -44,30 +45,34 @@ class ListNode implements listNodeInterface  {
     }
     this.size++
   }
-
+  // 插入
   public insert(position:number, ele:any):boolean {
-    if (position < 0 || position > this.size) {
+    let current = this.get(position);
+    let newEle = new NodeObj(ele)
+    if (current) {
+      newEle.next = current.next
+      current.next = newEle
+      this.size++
+      return true
+    } else {
       return false
+    }
+  }
+  // 获得位置上的元素
+  public get(position:number):any {
+    if (position < 0 || position > this.size) {
+      return null
     } else {
       let current:nodeInterface = this.header
-      let newEle = new NodeObj(ele)
-
       let index:number = 0
-      if (position === 0) {
-        newEle.next = current.next
-        current.next = newEle
-        return true
-      }
       while (index < position) {
         current = current.next
         index++
       }
-      newEle.next = current.next
-      current.next = newEle
-      return true
+      return current
     }
-    
   }
+  // 通过数组展示
   public display():Array<any> {
     let currObj = this.header,
         arr = [];
@@ -76,7 +81,8 @@ class ListNode implements listNodeInterface  {
         currObj = currObj.next;
     }
     return arr;
-}
+  }
+
 }
 
 // 测试代码
@@ -86,4 +92,8 @@ listNode.append("2")
 console.log(listNode.display())
 console.log(listNode.header)
 listNode.insert(2, null)
+listNode.insert(0, 0)
+listNode.insert(3, 3)
 console.log(listNode.display())
+console.log(listNode.size)
+console.log(listNode.get(3))
