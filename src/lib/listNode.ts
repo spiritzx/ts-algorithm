@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-05-03 16:34:30
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-05-05 22:44:00
+ * @LastEditTime: 2020-05-06 22:42:05
  */
 interface nodeInterface {
   element: any
@@ -33,20 +33,28 @@ class ListNode implements listNodeInterface  {
   public header:nodeInterface = new NodeObj("header")
   public size = 1
   // 尾部添加元素
-  public append(ele:any) {
+  public append(ele:any):boolean {
+    if (ele === null || ele === undefined) {
+      return false
+    }
+    let nodeObj = new NodeObj(ele)
     if (this.size === 1) {
-      this.header.next = new NodeObj(ele)
+      this.header.next = nodeObj
     } else {
       let current:nodeInterface = this.header
       while (current.next !== null) {
         current = current.next
       }
-      current.next = new NodeObj(ele)
+      current.next = nodeObj
     }
     this.size++
+    return true
   }
   // 插入
   public insert(position:number, ele:any):boolean {
+    if (ele === null || ele === undefined) {
+      return false
+    }
     let current = this.get(position);
     let newEle = new NodeObj(ele)
     if (current) {
@@ -72,6 +80,28 @@ class ListNode implements listNodeInterface  {
       return current
     }
   }
+  // 获得链表的元素的位置
+  public indexOf(ele:any):number {
+    let index = -1
+    let i = 0
+    let current = this.header
+    while (current) {
+      if (typeof current.element === "object") {
+        if (current.element.toString() === ele.toString()) {
+          index = i
+          break
+        }
+      } else {
+        if (current.element === ele) {
+          index = i
+          break
+        }
+      }
+      current = current.next
+      i++
+    }
+    return index
+  }
   // 通过数组展示
   public display():Array<any> {
     let currObj = this.header,
@@ -94,6 +124,8 @@ console.log(listNode.header)
 listNode.insert(2, null)
 listNode.insert(0, 0)
 listNode.insert(3, 3)
+listNode.append([1, 2, 3])
 console.log(listNode.display())
 console.log(listNode.size)
 console.log(listNode.get(3))
+console.log(listNode.indexOf(0))
