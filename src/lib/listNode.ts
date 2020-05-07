@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-05-03 16:34:30
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-05-06 22:42:05
+ * @LastEditTime: 2020-05-07 22:25:28
  */
 interface nodeInterface {
   element: any
@@ -32,6 +32,17 @@ interface listNodeInterface {
 class ListNode implements listNodeInterface  {
   public header:nodeInterface = new NodeObj("header")
   public size = 1
+  // 判断元素是否是正确的
+  private isEle(ele:any):boolean {
+    let res = false
+    if (ele === null || ele === undefined) {
+      res = false
+    } else {
+      res = true
+    }
+    return res
+  }
+
   // 尾部添加元素
   public append(ele:any):boolean {
     if (ele === null || ele === undefined) {
@@ -52,19 +63,18 @@ class ListNode implements listNodeInterface  {
   }
   // 插入
   public insert(position:number, ele:any):boolean {
-    if (ele === null || ele === undefined) {
-      return false
+    let res = false
+    if (this.isEle(ele)) {
+      let current = this.get(position);
+      let newEle = new NodeObj(ele)
+      if (current) {
+        newEle.next = current.next
+        current.next = newEle
+        this.size++
+        res = true
+      }
     }
-    let current = this.get(position);
-    let newEle = new NodeObj(ele)
-    if (current) {
-      newEle.next = current.next
-      current.next = newEle
-      this.size++
-      return true
-    } else {
-      return false
-    }
+    return res
   }
   // 获得位置上的元素
   public get(position:number):any {
@@ -102,6 +112,18 @@ class ListNode implements listNodeInterface  {
     }
     return index
   }
+  // 更新某个位置的链表元素
+  public update(position:number, ele:any):boolean {
+    let res = false
+    if (this.isEle(ele)) {
+      let current = this.get(position)
+      if (current) {
+        current.element = ele
+        res = true
+      }
+    }
+    return res
+  }
   // 通过数组展示
   public display():Array<any> {
     let currObj = this.header,
@@ -124,6 +146,7 @@ console.log(listNode.header)
 listNode.insert(2, null)
 listNode.insert(0, 0)
 listNode.insert(3, 3)
+console.log(listNode.update(4, 4))
 listNode.append([1, 2, 3])
 console.log(listNode.display())
 console.log(listNode.size)
