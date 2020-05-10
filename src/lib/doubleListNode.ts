@@ -3,23 +3,34 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-05-03 16:34:30
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-05-10 17:51:09
+ * @LastEditTime: 2020-05-10 22:51:28
  */
-interface nodeInterface {
+interface doubleNodeInterface {
   element: any
   next: any
+  previous:any
+  setNext:Function
+  setPrevious:Function
 }
-class NodeObj implements nodeInterface {
+class DoubleNodeObj implements doubleNodeInterface {
   public element = "header"
   public next = null
-  constructor(ele:any) {
+  public previous = null
+  public constructor(ele:any) {
     this.element = ele
+  }
+  public setPrevious(val:any) {
+    this.previous = val
+  }
+  public setNext(val:any) {
+    this.next = val
   }
 }
 
-interface listNodeInterface {
+interface doubleListNodeInterface {
   size:number // 链表数据长度
-  header:NodeObj // 链表头部
+  header:doubleNodeInterface // 链表头部
+  tail:doubleNodeInterface // 链表尾部
   append:Function // 添加链表元素
   display:Function // 通过数组展示链表
   insert:Function // 插入数据
@@ -30,9 +41,16 @@ interface listNodeInterface {
   remove:Function // 删除指定元素
 }
 
-class ListNode implements listNodeInterface  {
-  public header:nodeInterface = new NodeObj("header")
-  public size = 1
+class DoubleListNode implements listNodeInterface  {
+  public tail:doubleNodeInterface
+  public header:doubleNodeInterface
+  public constructor() {
+    this.header = new DoubleNodeObj("header")
+    this.tail = new DoubleNodeObj("tail")
+    this.header.setNext(this.tail)
+    this.tail.setPrevious(this.header)
+  }
+  public size = 2
   // 判断元素是否是正确的
   private isEle(ele:any):boolean {
     let res = false
@@ -45,27 +63,30 @@ class ListNode implements listNodeInterface  {
   }
   // 尾部添加元素
   public append(ele:any):boolean {
-    if (ele === null || ele === undefined) {
-      return false
+    let res = false
+    if (this.isEle(ele)) {
+      let nodeObj = new DoubleNodeObj(ele)
+      let tail:doubleNodeInterface = this.tail
+      tail.setPrevious(nodeObj)
+      nodeObj.setNext(tail)
+      this.size++
+      res = true
+      
+      // res = true
     }
-    let nodeObj = new NodeObj(ele)
-    let current:nodeInterface = this.header
-    while (current.next !== null) {
-      current = current.next
-    }
-    current.next = nodeObj
-    this.size++
-    return true
+    return res
   }
   // 插入
   public insert(position:number, ele:any):boolean {
     let res = false
     if (this.isEle(ele)) {
-      let current = this.get(position);
-      let newEle = new NodeObj(ele)
+      let current = this.get(position)
+      let newEle = new DoubleNodeObj(ele)
+      console.log(current)
       if (current) {
         newEle.next = current.next
-        current.next = newEle
+        newEle.previous = current
+        current.setNext(newEle)
         this.size++
         res = true
       }
@@ -77,7 +98,7 @@ class ListNode implements listNodeInterface  {
     if (position < 0 || position > this.size) {
       return null
     } else {
-      let current:nodeInterface = this.header
+      let current:doubleNodeInterface = this.header
       let index:number = 0
       while (index < position) {
         current = current.next
@@ -123,6 +144,7 @@ class ListNode implements listNodeInterface  {
   // 删除某个位置的元素
   public removeAt(position:number):any {
     let current = this.get(position)
+    
     if (position === 0) {
       if (current.next) {
         current.element = current.next.element
@@ -131,8 +153,11 @@ class ListNode implements listNodeInterface  {
       }
     } else {
       if (current) {
-        let previous = this.get(position - 1)
+        let previous = current.previous
         previous.next = current.next
+        if (current.next) {
+          current.next.previous = previous
+        }
         this.size--
       }
     }
@@ -156,30 +181,37 @@ class ListNode implements listNodeInterface  {
   
 }
 
-// 测试代码
-let listNode = new ListNode()
-listNode.append("1")
-listNode.append("2")
-console.log(listNode.display())
-listNode.insert(2, null)
-listNode.insert(0, 0)
-console.log(listNode.display())
-listNode.insert(3, 3)
-console.log("55:" + listNode.display())
-console.log(listNode.update(0, "头部"))
-listNode.append([1, 2, 3])
-console.log(listNode.display())
-console.log(listNode.size)
-console.log(listNode.get(3))
-console.log(listNode.indexOf(0))
-// 删除位置元素
-console.log(listNode.removeAt(0))
-console.log(listNode.removeAt(1))
-console.log(listNode.removeAt(5))
-console.log(listNode.display())
-console.log(listNode.size)
+/**
+ * 测试代码 
+ */
 
-console.log(listNode.remove("e"))
-console.log(listNode.remove([1, 2, 3]))
-console.log(listNode.display())
-console.log(listNode.size)
+// 尾部插入
+let double_listNode = new DoubleListNode()
+double_listNode.append("1")
+double_listNode.append("2")
+console.log(double_listNode.display())
+console.log(double_listNode.header)
+// 位置插入
+double_listNode.insert(0, 0)
+double_listNode.insert(3, 3)
+console.log(double_listNode.display())
+console.log(double_listNode.header)
+// 位置更新
+console.log(double_listNode.update(0, "头部"))
+console.log(double_listNode.display())
+console.log(double_listNode.size)
+// 获取位置上的元素
+console.log(double_listNode.get(3))
+// 获取元素的下标值
+console.log("下标值:" + double_listNode.indexOf(0))
+
+// // 删除位置元素
+console.log(double_listNode.removeAt(0))
+console.log(double_listNode.display())
+console.log(double_listNode.size)
+
+console.log("删除选定元素")
+console.log(double_listNode.remove("e"))
+console.log(double_listNode.remove(3))
+console.log(double_listNode.display())
+console.log(double_listNode.size)
