@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-05-03 16:34:30
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-05-10 22:51:28
+ * @LastEditTime: 2020-05-11 22:56:26
  */
 interface doubleNodeInterface {
   element: any
@@ -32,7 +32,8 @@ interface doubleListNodeInterface {
   header:doubleNodeInterface // 链表头部
   tail:doubleNodeInterface // 链表尾部
   append:Function // 添加链表元素
-  display:Function // 通过数组展示链表
+  forwardList:Function // 前序遍历
+  backList:Function // 后序遍历
   insert:Function // 插入数据
   get:Function // 获取某个位置的元素
   indexOf:Function // 获取某个元素的位置
@@ -41,7 +42,7 @@ interface doubleListNodeInterface {
   remove:Function // 删除指定元素
 }
 
-class DoubleListNode implements listNodeInterface  {
+class DoubleListNode implements doubleListNodeInterface  {
   public tail:doubleNodeInterface
   public header:doubleNodeInterface
   public constructor() {
@@ -50,7 +51,7 @@ class DoubleListNode implements listNodeInterface  {
     this.header.setNext(this.tail)
     this.tail.setPrevious(this.header)
   }
-  public size = 2
+  public size = 1
   // 判断元素是否是正确的
   private isEle(ele:any):boolean {
     let res = false
@@ -65,14 +66,20 @@ class DoubleListNode implements listNodeInterface  {
   public append(ele:any):boolean {
     let res = false
     if (this.isEle(ele)) {
-      let nodeObj = new DoubleNodeObj(ele)
-      let tail:doubleNodeInterface = this.tail
-      tail.setPrevious(nodeObj)
-      nodeObj.setNext(tail)
+      if (this.size === 1) {
+        this.tail.element = ele
+      } else {
+        let nodeObj = new DoubleNodeObj(ele)
+        let current:nodeInterface = this.header
+        while (current.next !== null) {
+          current = current.next
+        }
+        current.next = nodeObj
+        nodeObj.setPrevious(current)
+        this.tail = nodeObj
+      }
       this.size++
       res = true
-      
-      // res = true
     }
     return res
   }
@@ -82,11 +89,14 @@ class DoubleListNode implements listNodeInterface  {
     if (this.isEle(ele)) {
       let current = this.get(position)
       let newEle = new DoubleNodeObj(ele)
-      console.log(current)
+      // console.log("dd:" + current.element)
       if (current) {
         newEle.next = current.next
         newEle.previous = current
         current.setNext(newEle)
+        if (position === this.size - 1) {
+          this.tail = newEle
+        }
         this.size++
         res = true
       }
@@ -144,13 +154,17 @@ class DoubleListNode implements listNodeInterface  {
   // 删除某个位置的元素
   public removeAt(position:number):any {
     let current = this.get(position)
-    
+    if (this.size === 1 && current) {
+      return false
+    }
     if (position === 0) {
-      if (current.next) {
-        current.element = current.next.element
-        current.next = current.next.next
-        this.size--
-      }
+      this.header = current.next
+      this.header.previous = null
+      this.size--
+    } else if (position === this.size - 1) {
+      this.tail = current.previous
+      this.tail.next = null
+      this.size--
     } else {
       if (current) {
         let previous = current.previous
@@ -168,8 +182,8 @@ class DoubleListNode implements listNodeInterface  {
     let position = this.indexOf(ele)
     return this.removeAt(position)
   }
-  // 通过数组展示
-  public display():Array<any> {
+  // 前序遍历展示
+  public forwardList():Array<any> {
     let currObj = this.header,
         arr = [];
     while (currObj !== null) {
@@ -178,7 +192,16 @@ class DoubleListNode implements listNodeInterface  {
     }
     return arr;
   }
-  
+  // 后序遍历展示
+  public backList():Array<any> {
+    let currObj = this.tail,
+        arr = [];
+    while (currObj !== null) {
+        arr.push(currObj.element);
+        currObj = currObj.previous;
+    }
+    return arr;
+  }
 }
 
 /**
@@ -189,29 +212,42 @@ class DoubleListNode implements listNodeInterface  {
 let double_listNode = new DoubleListNode()
 double_listNode.append("1")
 double_listNode.append("2")
-console.log(double_listNode.display())
+console.log(double_listNode.forwardList())
 console.log(double_listNode.header)
 // 位置插入
-double_listNode.insert(0, 0)
-double_listNode.insert(3, 3)
-console.log(double_listNode.display())
+// double_listNode.insert(0, 0)
+double_listNode.insert(2, 3)
+console.log(double_listNode.forwardList())
+console.log(double_listNode.backList())
 console.log(double_listNode.header)
+console.log(double_listNode.size)
 // 位置更新
 console.log(double_listNode.update(0, "头部"))
-console.log(double_listNode.display())
+console.log(double_listNode.forwardList())
 console.log(double_listNode.size)
 // 获取位置上的元素
-console.log(double_listNode.get(3))
+console.log("下标值上的元素为:"+double_listNode.get(3).element)
 // 获取元素的下标值
-console.log("下标值:" + double_listNode.indexOf(0))
+console.log("下标值:" + double_listNode.indexOf(3))
 
 // // 删除位置元素
+console.log(double_listNode.removeAt(3))
+console.log(double_listNode.removeAt(2))
+console.log(double_listNode.removeAt(1))
 console.log(double_listNode.removeAt(0))
-console.log(double_listNode.display())
+console.log("删除后:" + double_listNode.forwardList())
 console.log(double_listNode.size)
 
-console.log("删除选定元素")
-console.log(double_listNode.remove("e"))
-console.log(double_listNode.remove(3))
-console.log(double_listNode.display())
+// console.log("删除选定元素")
+// console.log(double_listNode.remove("e"))
+// console.log(double_listNode.remove(3))
+// console.log(double_listNode.forwardList())
+// console.log(double_listNode.size)
+
+double_listNode.append("1")
+double_listNode.append("2")
+double_listNode.append("3")
+console.log(double_listNode.forwardList())
+console.log("后序遍历")
 console.log(double_listNode.size)
+console.log(double_listNode.backList())
