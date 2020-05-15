@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-05-14 19:42:04
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-05-14 22:10:12
+ * @LastEditTime: 2020-05-15 22:28:25
  */
 interface set{
   set:Set<any>
@@ -13,6 +13,8 @@ interface set{
   clear:Function // 清空元素
   union:Function // 求并集
   intersectionSet:Function // 求交集
+  defferenceSet:Function // 求差集
+  subSet:Function
 }
 
 class SetPack implements set {
@@ -51,6 +53,32 @@ class SetPack implements set {
     }
     return res
   }
+  public defferenceSet(arr:Set<any>):Array<any> {
+    let res:any[] = []
+    for (const key of this.set) {
+      if (!arr.has(key)) {
+        res.push(key)
+      }
+    }
+    for (const key of arr) {
+      if (!this.set.has(key)) {
+        res.push(key)
+      }
+    }
+    return res
+  }
+  public subSet(arr:Set<any>):Boolean {
+    let res = true
+    if (this.set.size < arr.size) {
+      return res = false
+    }
+    for (const key of arr) {
+      if (!this.set.has(key)) {
+        res = false
+      }
+    }
+    return res
+  }
 }
 
 
@@ -68,3 +96,10 @@ console.log(unionRes)
 // 交集
 let intersectionSet = set.intersectionSet(new Set([3, 4, 5, 6, 7, [1, 23]]))
 console.log(intersectionSet)
+
+// 求差值
+let interpolationSet = set.defferenceSet(new Set([3, 4, 5, 6, 7, [1, 23]]))
+console.log(interpolationSet)
+// 求差值
+let isSub = set.subSet(new Set([3, 4, 5, 6]))
+console.log(isSub)
