@@ -1,49 +1,10 @@
 /*
- * @Descripttion: 
+ * @Descripttion: 哈希表
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-05-18 21:52:21
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-05-24 22:36:10
+ * @LastEditTime: 2020-05-25 22:25:14
  */ 
-function addHashFn(key:string, prime:number) {
-  let hash:number = 0
-  let i:number = 0
-  for (hash = key.length, i = 0; i < key.length; i++) {
-    hash += key.charCodeAt(i);
-    return (hash % prime);
-  }
-}
-
-// let res = addHashFn("a", 26)
-// let res1 = addHashFn("z", 26)
-// console.log(res)
-// console.log(res1)
-
-function powerHashFn(key:string, prime:number) {
-  let hash:number = 0
-  let i:number = 0
-  for (hash = key.length, i = 0; i < key.length; i++) {
-    hash += key.charCodeAt(i) * Math.pow(prime, i);
-    return hash
-  }
-}
-
-let powerRes = powerHashFn("z", 27)
-
-console.log(powerRes)
-
-function hornerHashFn(key:string, prime:number) {
-  const H = 37;
-  let total:number = 0;
-  for (var i = 0; i < key.length; i++) {
-    total +=  H * total + key.charCodeAt(i);
-  }
-  total = total % prime;
-  if(total < 0 ){
-    total += prime - 1;
-  }
-  return parseInt(total + "");
-}
 
 interface hashTable {
   storage:Array<any>
@@ -99,7 +60,7 @@ class HashTable implements hashTable {
       bucket.push([key, value])
       this.count += 1
       if (this.count > this.limit * this.loadFactor) {
-        this.resize(this.limit * 2)
+        this.resize(this.getPrimeNumber(this.limit * 2))
       }
     }
   }
@@ -125,8 +86,8 @@ class HashTable implements hashTable {
         this.count--
         res = bucket.splice(tupleIndex, 1)[0]
         if (this.count < this.limit * (1 - this.loadFactor)) {
-          let _limit = this.limit / 2 <= 7 ? 7 : this.limit
-          this.resize(_limit)
+          let _limit = this.limit / 2 <= 7 ? 7 : this.limit / 2
+          this.resize(this.getPrimeNumber(_limit))
         }
         return res
       }
@@ -146,6 +107,32 @@ class HashTable implements hashTable {
         });
       }
     });
+  }
+  private getPrimeNumber(limit:number):number {
+    let num = parseInt(limit + "")
+    while (!this.checkPrimeFn(num)) {
+      num++
+    }
+    console.log(num)
+    return num
+  }
+  private checkPrimeFn(n:number):boolean {
+    if (n == 0 || n == 1){
+      return false;
+    }
+    if ( n == 2 ){
+        return true;
+    }
+    let sum:number = 1
+    for(var i:number = 2; i <= Math.sqrt(n); i += sum){
+      if (n % i == 0) {
+          return false;
+      }
+      if (i > 2) {
+        sum = 2
+      }
+    }
+    return true;
   }
 }
 
