@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-03-09 09:35:31
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-05-25 22:21:35
+ * @LastEditTime: 2020-06-02 09:38:04
  */
 console.log("ts")
 // require("./js/01")
@@ -14,6 +14,7 @@ console.log("ts")
 // require("./lib/doubleListNode")
 // require("./lib/set")
 // require("./lib/map")
-require("./lib/hashTable")
+// require("./lib/hashTable")
 // require("./tool/prime")
+require("./js/04")
 
