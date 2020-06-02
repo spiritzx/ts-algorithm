@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-05-18 21:52:21
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-05-25 22:25:14
+ * @LastEditTime: 2020-05-26 22:08:40
  */ 
 
 interface hashTable {
@@ -51,7 +51,6 @@ class HashTable implements hashTable {
     let isUpdate:boolean = false
     bucket.forEach(val => {
       if (val[0] === key) {
-        console.log(355)
         val[1] = value
         isUpdate = true
       }
