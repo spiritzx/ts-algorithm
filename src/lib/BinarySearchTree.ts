@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-05-30 22:00:22
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-06-10 00:12:36
+ * @LastEditTime: 2020-06-11 22:34:08
  */
 
 
@@ -196,7 +196,8 @@ class BinarySearchTree implements binarySearchTree {
         && searchRes.current.left === null
         && searchRes.current.right === null
       ) {
-        this.root === null
+
+        this.root = null as unknown as treeNode
       } else if (
         searchRes.current
         && searchRes.current.left
@@ -211,6 +212,13 @@ class BinarySearchTree implements binarySearchTree {
       ) {
         // 根节点只有右节点
         this.root = searchRes.current.right
+      } else if (
+        searchRes.current
+        && searchRes.current.left
+        && searchRes.current.right
+      ) {
+        // 删除根节点有两个子节点
+        this.getAfter(searchRes.current, this.root, searchRes.isLeftChild, true)
       }
       return res
     }
@@ -248,7 +256,6 @@ class BinarySearchTree implements binarySearchTree {
       && searchRes.current.left === null
       && searchRes.current.right
     ) {
-      console.log(466)
       if (searchRes.isLeftChild && searchRes.parent) {
         searchRes.parent.left = searchRes.current.right
       } else if (!searchRes.isLeftChild && searchRes.parent) {
@@ -263,14 +270,13 @@ class BinarySearchTree implements binarySearchTree {
       && searchRes.current.left
       && searchRes.current.right
     ) {
-      console.log(33132)
       // 找到该子节点的后继,然后把后继替换为该节点
       this.getAfter(searchRes.current, searchRes.parent, searchRes.isLeftChild)
     }
   }
 
   // 线性查找指定节点的后继
-  private getAfter(node:treeNode, parent:treeNode, isLeftChild:boolean) {
+  private getAfter(node:treeNode, parent:treeNode, isLeftChild:boolean, isRoot:Boolean = false) {
     let deleteNode = node
     let currentAfter = deleteNode.right 
     let afterNode:treeNode = currentAfter as treeNode
@@ -285,32 +291,59 @@ class BinarySearchTree implements binarySearchTree {
     }
     if (index > 1) {
       // 当删除节点的后继节点不是直接右子节点
-      parentAfterNode.right = afterNode.right
+      parentAfterNode.left= afterNode.right
+      // parentAfterNode.left = null
       afterNode.right = deleteNode.right
     }
     
-    afterNode.left = deleteNode.left
-    if (isLeftChild) {
-      parent.left = afterNode
+
+    if (isRoot) {
+      afterNode.left = deleteNode.left
+      afterNode.right = deleteNode.right
+      this.root = afterNode
     } else {
-      parent.right = afterNode
+      afterNode.left = deleteNode.left
+      if (isLeftChild) {
+        parent.left = afterNode
+      } else {
+        parent.right = afterNode
+      }
     }
+    
   }
 }
 
 let bst = new BinarySearchTree()
 
 bst.add(10)
-bst.add(7)
-bst.add(1)
-bst.add(2)
-bst.add(4)
-bst.add(5)
-bst.add(11)
-bst.add(8)
-bst.add(3)
-bst.add(15)
-bst.add(16)
+// bst.add(5)
+// bst.add(7)
+// bst.add(2)
+// bst.add(1)
+// bst.add(4)
+// bst.add(9)
+// bst.add(6)
+// bst.add(20)
+// bst.add(40)
+// bst.add(30)
+// bst.add(38)
+// bst.add(25)
+// bst.add(24)
+// bst.add(27)
+// bst.add(32)
+// bst.add(35)
+// bst.add(39)
+// bst.add(22)
+// bst.add(18)
+// bst.add(8)
+// bst.add(3)
+// bst.add(15)
+// bst.add(16)
+// bst.add(11)
+// bst.add(50)
+// bst.add(51)
+// bst.add(46)
+// bst.add(47)
 
 console.log(bst.root)
 
@@ -328,6 +361,25 @@ console.log(bst.isNode(3))
 console.log(bst.isNode(50))
 console.log(bst.isNode(7))
 
-// bst.delete(7)
-// console.log(bst.isNode(7))
+// 删除叶子节点
+// bst.delete(3)
+
+// 删除只有一个子节点的,且为左节点
+// bst.delete(9)
+
+// 删除只有一个右节点的,且为右节点
+// bst.delete(46)
+
+// 删除有两个子节点,后继节点没有右子节点的情况
+// bst.delete(20)
+
+// 删除有两个子节点,但是后继节点有右子节点的情况
+// bst.delete(40)
+
+
+// 删除根节点有两个子节点,但是后继节点有右子节点的情况
+bst.delete(10)
+
+// console.log(bst.isNode(2))
+bst.add(5)
 console.log(bst.root)
