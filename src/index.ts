@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-03-09 09:35:31
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-06-02 23:17:59
+ * @LastEditTime: 2020-12-10 20:14:20
  */
 console.log("ts")
 // require("./js/01")
@@ -16,7 +16,10 @@ console.log("ts")
 // require("./lib/map")
 // require("./lib/hashTable")
 // require("./tool/prime")
-require("./lib/BinarySearchTree")
+// require("./lib/BinarySearchTree")
 // require("./js/04")
 // require("./js/05")
+
+// 数组拍平
+require('./array/01');
 
