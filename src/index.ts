@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-03-09 09:35:31
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-12-10 20:14:20
+ * @LastEditTime: 2020-12-12 20:42:47
  */
 console.log("ts")
 // require("./js/01")
@@ -21,5 +21,7 @@ console.log("ts")
 // require("./js/05")
 
 // 数组拍平
-require('./array/01');
+// require('./array/01');
+// 数组去重
+require('./array/02');
 

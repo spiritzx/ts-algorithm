@@ -3,15 +3,20 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-12-10 20:12:52
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-12-10 21:05:37
+ * @LastEditTime: 2020-12-12 19:36:36
  */
-let arr01:any[] = [
-  [1],
-  2,
-  [[1], 2, 3],
-  [1, [2], [[3, [4], [[5, [6],]]]]],
-  7
-];
+let arr01:any[] = [];
+
+function getMultArr(num:number) {
+  for (let i = 1; i < num; i++) {
+    arr01[i] = []
+    for (let j = 0; j < i; j++) {
+      arr01[i][j] = [];
+      arr01[i][j].push([j])
+    }
+  }
+}
+getMultArr(2000);
 
 function flatFn(arr:any[]) {
   let res:number[] = [];
@@ -54,11 +59,12 @@ function flatTwoFn(arr:any[]) {
 // console.log(flatTwoFn(arr01));
 
 
-function flatThreeFn(arr:any[]) {
-  let res:number[] = [];
-  res = arr.flat(Infinity);
-  return res;
-}
+// function flatThreeFn(arr:any[]) {
+//   let res:number[] = [];
+//   res = arr.flat(Infinity);
+//   return res;
+// }
 
-console.log(flatThreeFn(arr01));
-
+console.time("runTime");
+flatOneFn(arr01)
+console.timeEnd("runTime");
