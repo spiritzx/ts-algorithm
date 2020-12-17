@@ -1,9 +1,9 @@
 /*
- * @Descripttion: 
+ * @Descripttion: 数组去重
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-12-12 14:34:55
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-12-12 20:46:04
+ * @LastEditTime: 2020-12-17 21:00:29
  */
 {
   let arr = [];

@@ -1,9 +1,9 @@
 /*
- * @Descripttion: 
+ * @Descripttion: 斐波那契数列
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-12-13 10:51:16
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-12-13 11:20:44
+ * @LastEditTime: 2020-12-17 21:00:38
  */
 console.log("斐波那契数列");
 console.log([1, 1, 2, 3, 5, 8, 13, 21, 34]);
