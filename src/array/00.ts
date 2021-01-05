@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-12-13 10:51:22
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-12-17 21:06:42
+ * @LastEditTime: 2021-01-05 21:46:32
  */
 /*
  *  数组
@@ -15,4 +15,6 @@
 // 斐波那契数列
 // require('./03');
 // 随机排序数组
-require('./04');
+// require('./04');
+// 两数之和
+require('./05');

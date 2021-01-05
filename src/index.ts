@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-03-09 09:35:31
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-12-27 21:22:02
+ * @LastEditTime: 2021-01-05 21:47:46
  */
 console.log("ts")
 // require("./js/01")
@@ -23,11 +23,11 @@ console.log("ts")
 /*
   * 其他
  */
-require('./js/00');
+// require('./js/00');
 
 /*
  *  数组
  */ 
-// require('./array/00');
+require('./array/00');
 
 
