@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2021-01-10 15:26:29
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2021-01-10 16:23:26
+ * @LastEditTime: 2021-01-10 16:31:16
  */
 // 给定一个包含红色、白色和蓝色，一共 n 个元素的数组
 // 原地对它们进行排序
@@ -24,7 +24,7 @@
       }
       else {
         --k;
-        [res[k], res[i]] = [res[i], res[k]]
+        [res[k], res[i]] = [res[i], res[k]];
       }
     }
     return res;

@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-12-13 10:51:22
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2021-01-10 15:57:11
+ * @LastEditTime: 2021-01-10 21:29:42
  */
 /*
  *  数组
@@ -23,4 +23,6 @@
 // 花钱最优解,贪心算法
 // require('./2020/07');
 // 颜色分类, 三路快排
-require('./2021/01');
+// require('./2021/01');
+// 双指针之碰撞指针;回文判断
+require('./2021/02');
