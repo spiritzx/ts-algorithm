@@ -3,22 +3,24 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-12-13 10:51:22
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2021-01-07 22:06:23
+ * @LastEditTime: 2021-01-10 15:57:11
  */
 /*
  *  数组
  */ 
 // 数组拍平
-// require('./01');
+// require('./2020/01');
 // 数组去重
-// require('./02');
+// require('./2020/02');
 // 斐波那契数列
-// require('./03');
+// require('./2020/03');
 // 随机排序数组
-// require('./04');
+// require('./2020/04');
 // 两数之和
-// require('./05');
+// require('./2020/05');
 // 寻找两个正序数组的中位数
-// require('./06');
+// require('./2020/06');
 // 花钱最优解,贪心算法
-require('./07');
+// require('./2020/07');
+// 颜色分类, 三路快排
+require('./2021/01');
