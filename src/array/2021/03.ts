@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2021-01-17 16:34:52
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2021-01-17 17:32:29
+ * @LastEditTime: 2021-01-17 21:23:29
  */
 
 
@@ -17,7 +17,6 @@ exports.maxArea = function(height: number[]): number {
    let len = height.length;
   for (; i < len - 1; i++ ) {
     for (let j = i + 1; j< len; j++ ) {
-      console.log(i, j)
       res = Math.max(res, (j - i)* Math.min(height[i], height[j]))
     }
   }
