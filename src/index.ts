@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-03-09 09:35:31
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2021-01-10 16:23:52
+ * @LastEditTime: 2021-02-09 12:18:20
  */
 console.log("ts")
 // require("./js/01")
@@ -28,9 +28,18 @@ console.log("ts")
 /*
  *  数组
  */ 
-require('./array/00');
+// require('./array/00');
 /*
   * 树
  */
 // require('./tree/binarySearch.ts');
 
+/*
+ *  promise
+ */ 
+// require('./tool/MyPromise');
+
+/*
+  * sort
+ */
+require("./sort/index")
