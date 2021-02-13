@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-03-09 09:35:31
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2021-02-09 12:18:20
+ * @LastEditTime: 2021-02-13 19:43:46
  */
 console.log("ts")
 // require("./js/01")
@@ -42,4 +42,10 @@ console.log("ts")
 /*
   * sort
  */
-require("./sort/index")
+// require("./sort/index")
+
+/* 
+  * 节流与防抖
+ */
+
+require("./tool/debounceAndThrottle")
