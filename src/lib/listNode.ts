@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-05-03 16:34:30
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2021-03-13 18:35:54
+ * @LastEditTime: 2021-03-13 23:18:54
  */
 export interface NodeInterface {
   element: number | string;

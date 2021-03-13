@@ -1,12 +1,12 @@
 /*
- * @Descripttion: 
+ * @Descripttion: 单链表测试
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2021-03-13 18:30:00
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2021-03-13 18:51:19
+ * @LastEditTime: 2021-03-13 23:24:26
  */
 var expect = require('chai').expect;
-const ListNode = require('../../src/lib/listNode_02');
+import ListNode from '../../src/lib/listNode_02';
 
 describe("链表",  function () {
   it('生成节点', function () {
@@ -24,13 +24,13 @@ describe("链表",  function () {
   it('获得节点', function () {
     let listNode = new ListNode([1, 2, 3]);
     let res = listNode.get(1);
-    expect(res.element).to.be.equal(2);
+    expect(res?.element).to.be.equal(2);
   });
   it('更新节点', function () {
     let listNode = new ListNode([1, 2, 3]);
     listNode.update(1, 2.5);
     const res = listNode.get(1);
-    expect(res.element).to.be.equal(2.5);
+    expect(res?.element).to.be.equal(2.5);
   });
   it('删除某个节点', function () {
     let listNode = new ListNode([1, 2, 3]);
@@ -38,7 +38,7 @@ describe("链表",  function () {
     const res = listNode.display();
     expect(res).to.be.eql([1, 3]);
   });
-  it.only('清除所有节点', function () {
+  it('清除所有节点', function () {
     let listNode = new ListNode([1, 2, 3]);
     listNode.clear();
     const res = listNode.display();

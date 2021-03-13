@@ -1,16 +1,10 @@
-/*
- * @Descripttion: 队列同过数组实现
- * @Author: tom-z(spirit108@foxmail.com)
- * @Date: 2020-04-25 11:18:22
- * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-05-02 17:33:30
- */
+
 /*
  * @Descripttion: 用数组模拟栈
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-04-20 22:16:40
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-04-22 21:42:20
+ * @LastEditTime: 2021-03-13 21:48:28
  */
 interface queueInterface {
   push:Function // 添加元素

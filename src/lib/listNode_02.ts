@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2021-03-13 14:11:06
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2021-03-13 18:42:13
+ * @LastEditTime: 2021-03-13 22:15:23
  */
 import { NodeInterface, listNodeInterface, NodeObj } from './listNode';
 import { isNumberOrString } from "../tool/baseUtils";
@@ -112,4 +112,4 @@ class ListNode02 implements listNodeInterface {
   }
 }
 
-module.exports = ListNode02;
+export default ListNode02;
