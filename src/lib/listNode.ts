@@ -3,23 +3,22 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-05-03 16:34:30
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-05-10 17:51:09
+ * @LastEditTime: 2021-03-13 18:35:54
  */
-interface nodeInterface {
-  element: any
-  next: any
+export interface NodeInterface {
+  element: number | string;
+  next: null | NodeInterface;
 }
-class NodeObj implements nodeInterface {
-  public element = "header"
-  public next = null
-  constructor(ele:any) {
-    this.element = ele
+export class NodeObj implements NodeInterface {
+  public element = "header" as NodeInterface["element"];
+  public next = null;
+  constructor(ele: string | number) {
+    this.element = ele;
   }
 }
 
-interface listNodeInterface {
+export interface listNodeInterface {
   size:number // 链表数据长度
-  header:NodeObj // 链表头部
   append:Function // 添加链表元素
   display:Function // 通过数组展示链表
   insert:Function // 插入数据
@@ -27,11 +26,13 @@ interface listNodeInterface {
   indexOf:Function // 获取某个元素的位置
   update:Function // 更新某个位置上的元素
   removeAt:Function // 删除某个位置的元素
-  remove:Function // 删除指定元素
+  remove?:Function // 删除指定元素
+  clear?:() => void // 删除指定元素
+  listNode?:() => NodeIterator | null // 得到链表
 }
 
 class ListNode implements listNodeInterface  {
-  public header:nodeInterface = new NodeObj("header")
+  private header:NodeInterface = new NodeObj("header")
   public size = 1
   // 判断元素是否是正确的
   private isEle(ele:any):boolean {
@@ -49,7 +50,7 @@ class ListNode implements listNodeInterface  {
       return false
     }
     let nodeObj = new NodeObj(ele)
-    let current:nodeInterface = this.header
+    let current:NodeInterface = this.header
     while (current.next !== null) {
       current = current.next
     }
@@ -77,10 +78,10 @@ class ListNode implements listNodeInterface  {
     if (position < 0 || position > this.size) {
       return null
     } else {
-      let current:nodeInterface = this.header
+      let current:NodeInterface = this.header
       let index:number = 0
-      while (index < position) {
-        current = current.next
+      while (position < this.size && index < position) {
+        current = current.next as  NodeInterface
         index++
       }
       return current
@@ -92,18 +93,11 @@ class ListNode implements listNodeInterface  {
     let i = 0
     let current = this.header
     while (current) {
-      if (typeof current.element === "object") {
-        if (current.element.toString() === ele.toString()) {
-          index = i
-          break
-        }
-      } else {
-        if (current.element === ele) {
-          index = i
-          break
-        }
+      if (current.element === ele) {
+        index = i
+        break
       }
-      current = current.next
+      current = current.next as NodeInterface
       i++
     }
     return index
@@ -149,37 +143,39 @@ class ListNode implements listNodeInterface  {
         arr = [];
     while (currObj !== null) {
         arr.push(currObj.element);
-        currObj = currObj.next;
+        currObj = currObj.next as NodeInterface;
     }
     return arr;
   }
   
 }
 
-// 测试代码
-let listNode = new ListNode()
-listNode.append("1")
-listNode.append("2")
-console.log(listNode.display())
-listNode.insert(2, null)
-listNode.insert(0, 0)
-console.log(listNode.display())
-listNode.insert(3, 3)
-console.log("55:" + listNode.display())
-console.log(listNode.update(0, "头部"))
-listNode.append([1, 2, 3])
-console.log(listNode.display())
-console.log(listNode.size)
-console.log(listNode.get(3))
-console.log(listNode.indexOf(0))
-// 删除位置元素
-console.log(listNode.removeAt(0))
-console.log(listNode.removeAt(1))
-console.log(listNode.removeAt(5))
-console.log(listNode.display())
-console.log(listNode.size)
+export default ListNode;
 
-console.log(listNode.remove("e"))
-console.log(listNode.remove([1, 2, 3]))
-console.log(listNode.display())
-console.log(listNode.size)
+// // 测试代码
+// let listNode = new ListNode()
+// listNode.append("1")
+// listNode.append("2")
+// console.log(listNode.display())
+// listNode.insert(2, null)
+// listNode.insert(0, 0)
+// console.log(listNode.display())
+// listNode.insert(3, 3)
+// console.log("55:" + listNode.display())
+// console.log(listNode.update(0, "头部"))
+// listNode.append([1, 2, 3])
+// console.log(listNode.display())
+// console.log(listNode.size)
+// console.log(listNode.get(3))
+// console.log(listNode.indexOf(0))
+// // 删除位置元素
+// console.log(listNode.removeAt(0))
+// console.log(listNode.removeAt(1))
+// console.log(listNode.removeAt(5))
+// console.log(listNode.display())
+// console.log(listNode.size)
+
+// console.log(listNode.remove("e"))
+// console.log(listNode.remove([1, 2, 3]))
+// console.log(listNode.display())
+// console.log(listNode.size)

@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2021-01-18 22:38:06
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2021-02-09 20:49:32
+ * @LastEditTime: 2021-03-13 18:42:41
  */
 var { expect } = require('chai');
 const {randomNumberArr} = require('../../src/tool/randomNumberArr');
@@ -31,7 +31,7 @@ describe("排序",  function () {
   it('10000个数快速排序', function () {
     expect(quickSort(numArr)).to.have.lengthOf(10000);
   });
-  it.only('10000个数快速排序', function () {
+  it('10000个数快速排序', function () {
     expect(quickSort(numArr)).to.have.lengthOf(10000);
   });
   it('10000个数计数排序', function () {
