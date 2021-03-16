@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2021-03-14 22:25:45
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2021-03-14 22:56:37
+ * @LastEditTime: 2021-03-16 20:16:27
  */
 import fib from "../../src/lib/Fibonacci";
 
@@ -19,7 +19,7 @@ describe("斐波那契数列", () => {
     console.log(res);
     expect(res).to.be.equal(89);
   })
-  it.only("动态规划", () => {
+  it("动态规划", () => {
     let res = fib.getFibTwoFn(24);
     console.log(res);
     expect(res).to.be.equal(46368);
