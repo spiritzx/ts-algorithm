@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2021-03-16 19:59:25
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2021-03-16 20:20:55
+ * @LastEditTime: 2021-03-16 21:58:21
  */
 /* 
   * 爬楼梯
@@ -20,17 +20,19 @@ export function climbStairs(n: number): number {
   if (n === 2) return 2;
   return climbStairs(n - 2) + climbStairs(n - 1);
 }
-
-export function climbStairsOne(n: number): number {
-  let obj = {};
-  obj[1] = 1;
-  obj[2] = 2;
-  if (obj[n] === undefined) {
-    obj[n] = climbStairs(n);
-  } 
+function climbStairsFn(n: number, obj: Object) {
+  if (obj[n] === undefined) 
+      obj[n] = climbStairsFn(n - 2, obj) + climbStairsFn(n - 1, obj);
   return obj[n];
 }
 
+export function climbStairsOne(n: number) {
+  let obj = {};
+  obj[1] = 1; 
+  obj[2] = 2; 
+  climbStairsFn(n, obj);
+  return obj[n];
+}
 export function climbStairsTwo(n: number): number {
   let obj = {};
   obj[1] = 1;

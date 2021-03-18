@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2021-03-16 20:10:55
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2021-03-16 20:20:29
+ * @LastEditTime: 2021-03-17 22:19:00
  */
 import { climbStairs, climbStairsOne, climbStairsTwo } from "../../src/DP/climbStairs";
 
@@ -18,7 +18,7 @@ describe("动态规划之爬楼梯", () => {
     let res = climbStairsOne(23);
     expect(res).to.be.equal(46368)
   })
-  it.only("动态规划", () => {
+  it("动态规划", () => {
     let res = climbStairsTwo(23);
     expect(res).to.be.equal(46368)
   })
